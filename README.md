@@ -1,2 +1,2 @@
 # test_task_1
-Test task foe internship
+Test task for internship
