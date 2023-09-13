@@ -102,7 +102,7 @@ mod tests {
     fn get_score_with_offset_more_than_range_would_return_offset_is_out_of_range_error() {
         let game = generate_game();
         let offset = ((TIMESTAMPS_COUNT * 3) + 1) as i32;
-        let score = get_score(game.as_slice(), offset);
+        let score = get_score(&game, offset);
         assert_eq!(score.err().unwrap().to_string(), format!("Error: offset is out of range : {}", offset));
     }
 
@@ -110,7 +110,7 @@ mod tests {
     fn get_score_with_offset_less_than_range_would_return_offset_is_out_of_range_error() {
         let game = generate_game();
         let offset = -1 as i32;
-        let score = get_score(game.as_slice(), offset);
+        let score = get_score(&game, offset);
         assert_eq!(score.err().unwrap().to_string(), format!("Error: offset is out of range : {}", offset));
     }
 
@@ -164,7 +164,7 @@ mod tests {
             .map(|o| o * rand::thread_rng().gen_range(0..(TIMESTAMPS_COUNT as usize)))
             .collect::<Vec<usize>>();
         // убеждаемся, что в массиве нет искомых значений
-        remove_stamps(&mut game, offsets.as_slice());
+        remove_stamps(&mut game, &offsets);
 
         for o in offsets {
             assert_eq!(get_score(&game, o as i32).err().unwrap().to_string(),
