@@ -1,2 +1,2 @@
-# test_task_1
-Test task for internship
+# Score generating
+Library modelling game score
